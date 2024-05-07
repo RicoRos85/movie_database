@@ -1,0 +1,51 @@
+{% extends 'layout.html' %}
+
+{% block title %}Home - Movie Catalog{% endblock %}
+
+{% block content %}
+
+<form>
+<div class="container text-center">
+    <div class="row">
+        
+            <div class="col">
+                <input type="text" name="title" class="form-control" placeholder="Title" value="{{ request.args.get('title', '') }}">
+            </div>
+            <div class="col">
+                <select class="form-select" name="genre" >
+                    <option selected>Select Genre</option>
+                    {% for genre in genres %}
+                    <option value="{{ genre }}" {% if request.args.get('genre', '') == genre %}selected{% endif %}>{{ genre }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col">
+                <input type="number" name="year" class="form-control" placeholder="Year" value="{{ request.args.get('year', '') }}">
+            </div>
+            <div class="col">
+                <button type="submit">Filter</button>
+            </div>
+        
+    </div>
+    
+</div>
+</form>
+
+<div class="container list_movies">
+    
+    {% for movie in movies %}
+        <div class="row list_movie_row">
+            <div class="col-2">
+                <img src="{{ movie['poster'] }}" class="list_movie_poster">
+            </div>
+            <div class="col-10">
+                <h2><a href="{{ url_for('movie_detail', movie_id=movie['_id']) }}">{{ movie['title'] }}</a> <span>(Rating: {{ movie['imdb']['rating'] }})</span></h2>
+                <p>{{ movie['plot'] }}</p>
+            </div>
+            
+        </div>
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

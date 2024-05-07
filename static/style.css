@@ -1,0 +1,12 @@
+.list_movies h2 {
+    font-size: 18px;
+}
+.list_movies h2 span {
+    font-size: 14px;
+}
+.list_movie_row {
+    margin-bottom: 20px;
+}
+.list_movie_poster {
+    max-width: 80px;
+}

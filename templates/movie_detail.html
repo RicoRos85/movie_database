@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ movie.title }}</title>
+</head>
+<body>
+    <h1>{{ movie.title }}</h1>
+    <p><strong>Year:</strong> {{ movie.year }}</p>
+    <p><strong>Genres:</strong> {{ ', '.join(movie.genres) }}</p>
+    <p><strong>Plot:</strong> {{ movie.fullplot }}</p>
+    <h2>Cast</h2>
+    <ul>
+        {% for actor in movie.cast %}
+        <li>{{ actor }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Directors</h2>
+    <ul>
+        {% for director in movie.directors %}
+        <li>{{ director }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Writers</h2>
+    <ul>
+        {% for writer in movie.writers %}
+        <li>{{ writer }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Back to list</a>
+</body>
+</html>
