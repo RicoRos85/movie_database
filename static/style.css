@@ -1,3 +1,6 @@
+h1 {
+    font-weight: bold;
+}
 hr {
     margin: 30px 0;
 }
@@ -49,4 +52,15 @@ hr {
     height: 100%;
     width: 100%;
     position: absolute;
+}
+
+.single_movie_poster {
+    box-shadow: 0 13px 18px -8px #00000047;
+}
+.single_movie_list a {
+    text-decoration: none;
+    font-size: 14px;
+}
+.p-3 {
+    padding: 0 3rem !important;
 }

@@ -58,8 +58,6 @@ def index():
             query['year'] = int(query_year)
         except ValueError:
             pass
-    if query_poster:
-        query['poster'] = query_poster
     if query_rating:
         try:
             query['imdb.rating'] = {"$gte": float(query_rating)}
@@ -73,15 +71,20 @@ def index():
      # Aggregation pipeline for fetching 25 random movies
     pipeline = [
         {"$match": query},              # Filtering based on query
-        {"$sort": {"year": -1}},        # Sort by year in descending order
+        #{"$sort": {"year": -1}},        # Sort by year in descending order
         {"$skip": skip},                # Skip the documents for previous pages
         {"$limit": limit},              # Limit the results to 'limit' items
+        {"$sample": {"size": 10000}}  # Use $sample to get random documents
     ]
 
     movies = list(collection.aggregate(pipeline))
+    for movie in movies:
+        if not movie.get('poster'):  # Check if 'poster' field is missing or empty
+            movie['poster'] = 'https://www.prokerala.com/movies/assets/img/no-poster-available.jpg'  # Specify your default image path
+  
     total_movies = collection.count_documents(query)
     total_pages = (total_movies + limit - 1) // limit # Calculate total pages needed
-    return render_template('index.html', movies=movies, genres=genres, query_title=query_title, query_genre=query_genre, query_year=query_year, query_poster=query_poster, query_rating=query_rating, page=page, total_pages=total_pages)
+    return render_template('index.html', movies=movies, genres=genres,  page=page, total_pages=total_pages)
 
 
 @app.route('/movie/<movie_id>')

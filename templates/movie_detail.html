@@ -4,18 +4,18 @@
 
 {% block content %}
 
-<div class="container">
+<div class="container  overflow-hidden">
     <h1>{{ movie.title }}</h1>
     <a href="{{ url_for('index') }}" class="back_to_home"> < Back to list</a>
     <hr>
     <div class="row">
         <div class="col-4">
-            <img src="{{ movie.poster }}" class="img-fluid">
+            <img src="{{ movie.poster }}" class="img-fluid single_movie_poster">
         </div>
-        <div class="col-8">
+        <div class="col-8   p-3">
            
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
                         <p><strong>Year:</strong> {{ movie.year }}</p>
                     </div>
                     <div class="col-4">
@@ -56,7 +56,7 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4 single_movie_list">
                         <h4>Cast</h4>
                         <ul>
                             {% for actor in movie.cast %}
@@ -64,7 +64,7 @@
                             {% endfor %}
                         </ul>
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 single_movie_list">
                         <h4>Directors</h4>
                         {% if movie.directors %}
                             <ul>
@@ -76,11 +76,11 @@
                             <p>No directors listed.</p>
                         {% endif %}
                     </div>
-                    <div class="col-4">
+                    <div class="col-4 single_movie_list">
                         <h4>Writers</h4>
                         <ul>
                             {% for writer in movie.writers %}
-                            <li>{{ writer }}</li>
+                            <li><a href ="#">{{ writer }}</a></li>
                             {% endfor %}
                         </ul>
                        
